@@ -18,29 +18,6 @@
 ;;      8
 ;;      12
 
-(use '[clojure.string :only (join split trim)])
-
-(defn -main [& args]
-
-  (def lines (split (slurp (first args)) #"\n"))
-
-  (defn max_subseq-sum [s]
-    (let [maxes {:so-far 0 :curr 0}
-          f     (fn [maxes x]
-                  (let [curr   (max 0 (+ (maxes :curr) x)) 
-                        so-far (max (maxes :so-far) curr)]
-                    { :curr curr  :so-far so-far}))]
-  ((reduce f maxes s) :so-far)))
-
-  (defn process-line [line]
-    (let [nums (map #(Integer/parseInt (trim %)) (split line #",") )]
-       (max_subseq-sum nums)))
-
-  (println (join "\n" (map process-line lines))))
-
-(apply -main *command-line-args*)
-
-
 ;; # Kadane's algorithm
 ;; This is also known as the maximum subarray problem
 ;;
@@ -59,5 +36,19 @@
                   { :curr curr  :so-far so-far}))]
     ((reduce f maxes s) :so-far)))
 
-(max_subseq-sum [-10 2 3 -2 0 5 -15])   ;; 8
-(max_subseq-sum [2 3 -2 -1 10])         ;; 12
+; (max_subseq-sum [-10 2 3 -2 0 5 -15])   ;; 8
+; (max_subseq-sum [2 3 -2 -1 10])         ;; 12
+
+(use '[clojure.string :only (join split trim)])
+
+(defn -main [& args]
+
+  (def lines (split (slurp (first args)) #"\n"))
+
+  (defn process-line [line]
+    (let [nums (map #(Integer/parseInt (trim %)) (split line #",") )]
+       (max_subseq-sum nums)))
+
+  (println (join "\n" (map process-line lines))))
+
+(apply -main *command-line-args*)

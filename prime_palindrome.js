@@ -25,12 +25,7 @@ var is_palindrome = function(n){
 };
 
 var is_palprime = function(n){
-  if(is_prime(n)){
-    if(is_palindrome(n)){
-      return true;
-    }
-  }
-  return false;
+  return is_prime(n) ? is_palindrome(n) : false;
 };
 
 // start from 1000 and stop when a palprime is found
@@ -43,3 +38,5 @@ var countdown = function(){
 };
 
 countdown();
+
+console.log( countdown() );

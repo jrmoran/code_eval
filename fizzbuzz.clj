@@ -36,22 +36,16 @@
 ;;      1 2 F 4 B F 7 8 F B
 ;;      1 F 3 F 5 F B F 9 F 11 F 13 FB 15
 
-; (:use [clojure.contrib.duck-streams :only (read-lines)])
-
 (defn -main [& args]
 
   ;; since input is quite small, holdong the file in memory is fine
-  ; (def file (slurp (first args)))
-  (def file "3 5 10\n2 7 15")
+  (def file (slurp (first args)))
 
   (defn buzziffy [a b x]
-    (if (and (zero? (mod x a)) (zero? (mod x b)))
-      "FB"
-      (if (zero? (mod x a))
-        "F"
-        (if (zero? (mod x b))
-          "B"
-          x))))
+    (cond (and (zero? (mod x a)) (zero? (mod x b))) "FB"
+          (zero? (mod x a)) "F"
+          (zero? (mod x b)) "B"
+          :else x))
 
   (defn process-line [line]
     (let [[a b n] (map #(Integer/parseInt %) (.split line " "))]

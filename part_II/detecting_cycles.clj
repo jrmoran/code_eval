@@ -70,6 +70,11 @@
 (apply -main *command-line-args*)
 
 
+(process-line "2 0 6 3 1 6 3 1 6 3 1" )
+
+
+
+;; Other stuff
 (get-cycle [2 0 6 3 1 6 3 1 6 3 1])
 
 (get-cycle [1 2 3 4 2 3 4])
@@ -88,8 +93,4 @@
 
 (extract-range (range 10) 2 (+ 2 3))
 
-(process-line "2 0 6 3 1 6 3 1 6 3 1" )
-
 (def lines (split "1 2 3 4 2 3 4\n1 5 7 8 12 5 7 8 12\n1 2 3 4" #"\n") )
-
-; (println (join "\n" (map process-line lines)))
